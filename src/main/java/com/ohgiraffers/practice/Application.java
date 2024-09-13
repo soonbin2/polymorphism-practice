@@ -1,5 +1,7 @@
 package com.ohgiraffers.practice;
 
+import java.util.Scanner;
+
 public class Application {
     public static void main(String[] args) {
         /* 다형성 주제
@@ -22,9 +24,50 @@ public class Application {
           사각형의 경우, 너비와 높이를 입력받습니다.
           삼각형의 경우, 밑변과 높이를 입력받습니다.
           입력된 정보를 바탕으로 해당 도형 객체를 생성하고, draw와 area 메서드를 호출하여 결과를 출력합니다.
-        *
-        *
-        *
         * */
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("도형을 입력하세요. (circle, rectangle, triangle) :");
+        String shapeType = scanner.nextLine().toLowerCase();
+
+        Shape shape = null;
+
+        switch (shapeType) {
+            case "circle":
+                System.out.println("원의 반지름을 입력하세요 : ");
+                double radius = scanner.nextDouble();
+                shape = new Circle(radius);
+                break;
+
+            case "rectangle":
+                System.out.println("사각형의 너비를 입력하세요 : ");
+                double width = scanner.nextDouble();
+                System.out.println("사각형의 높이를 입력하세요 : ");
+                double height = scanner.nextDouble();
+                shape = new Rectangle(width, height);
+                break;
+
+            case "triangle":
+                System.out.println("삼각형의 밑면을 입력하세요 : ");
+                double base = scanner.nextDouble();
+                System.out.println("삼각형의 높이를 입력하세요 : ");
+                double triangleHeight = scanner.nextDouble();
+                shape = new Triangle(base, triangleHeight);
+                break;
+
+            default:
+                System.out.println("도형이 존재하지 않습니다.");
+                System.exit(1);
+        }
+
+        if (shape != null) {
+            shape.draw();
+            System.out.println("넓이 : " + shape.area());
+        }
+
+        scanner.close();
     }
 }
+
+
